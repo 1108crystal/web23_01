@@ -1,7 +1,8 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
     <p class="t cent botli">網站標題管理</p>
     <!-- <form method="post" target="back" action="?do=tii"> -->
-    <form method="post" action="?do=tii">
+        
+    <form method="post" action="../api/edit.php">
         <table width="100%">
             <tbody>
                 <tr class="yel">
@@ -30,8 +31,9 @@
                         <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
                     </td>
                     <td>
-                        <input type="button" value="更新圖片">
+                        <input type="button" onclick="op('#cover','#cvr','./modal/upload_title.php?id=<?=$row['id'];?>')" value="更新圖片" >
                         <input type="hidden" name="id[]" value="<?=$row['id'];?>">
+                        <input type="hidden" name="table" value="Title">
                     </td>
                 </tr>
                 <?php
