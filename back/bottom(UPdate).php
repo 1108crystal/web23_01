@@ -1,20 +1,18 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">進站總人數管理</p>
+    <p class="t cent botli">版權管理</p>
     <!-- <form method="post" target="back" action="?do=tii"> -->
         
-    <!-- <form method="post" action="../api/update.php"> -->
-    <form method="post" action="../api/edit.php">
-        <?php
-        $row=$Total->find(1);?>
+    <form method="post" action="../api/update.php">
+    <!-- <form method="post" action="../api/edit.php"> -->
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="50%">進站總人數</td>
-                    <td width="50%">
-                        <input type="number" name="total[]" value="<?=$row['total']?>">
+                    <td width="20%">版權內容:</td>
+                    <td width="80%">
+                        <input type="text" name="bottom" value="<?=$Bottom->find(1)['bottom']?>">
                     </td>
-                    <input type="hidden" name="table" value="Total">
-                    <input type="hidden" name="id[]" value="<?=$row['id']?>">
+                    <input type="hidden" name="table" value="Bottom">
+                    <input type="hidden" name="id" value="<?=$Bottom->find(1)['id']?>">
                     
                 </tr>
 

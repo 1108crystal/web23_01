@@ -165,4 +165,11 @@ $Image=new DB('image');
 $News=new DB('news');
 $Admin=new DB('admin');
 $Total=new DB('total');
-
+$Menu=new DB('menu');
+//增加進店總人數
+if(!isset($_SESSION['visit'])){
+    $_SESSION['visit']=1;
+    $total=$Ttotal->find(1)['total'];
+    $total['total']++;
+    $Ttotal->save($total);
+}
