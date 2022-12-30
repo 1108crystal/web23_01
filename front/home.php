@@ -20,6 +20,12 @@
 	<!--正中央-->
 	<script>
 		var lin = new Array();
+		<?php
+		$mvs=$Mvim->all(['sh'=>1]);
+		foreach($mvs as $mv){
+			echo "lin.push('../upload/{$mv['img']}');";
+		}
+		?>
 		var now = 0;
 		if (lin.length > 1) {
 			setInterval("ww()", 3000);
