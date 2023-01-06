@@ -13,6 +13,7 @@ include "./api/base.php";
 	<link href="./css/css.css" rel="stylesheet" type="text/css">
 	<script src="./js/jquery-1.9.1.min.js"></script>
 	<script src="./js/js.js"></script>
+
 </head>
 
 <body>
@@ -34,10 +35,34 @@ include "./api/base.php";
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
+
+					<?php
+					$menu = $Menu->all(['sh' => 1, 'parent' => 0]);
+					foreach ($menu as $main) {
+						echo "<div class='mainmu'>";
+						echo "	<a   href='{$main['href']}'>";
+						echo  $main['name'];
+						echo "	</a>";
+
+						echo "	<div class='mw' style='display:none'>";
+						if ($Menu->count(['parent' => $main['id']]) > 0) {
+							$subs = $Menu->all(['sh' => 1, 'parent' => $main['id']]);
+							foreach ($subs as $sub) {
+								echo "<a href='{$sub['href']}'>";
+								echo " <div class='mainmu2'> " . $sub['name'] . "</div>";
+								echo "</a>";
+							}
+						}
+
+						echo "	</div>";
+						echo "</div>";
+					}
+					?>
+
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-					<?=$Total->find(1)['total']?>
+						<?= $Total->find(1)['total'] ?>
 					</span>
 				</div>
 			</div>
@@ -67,28 +92,47 @@ include "./api/base.php";
 			</script>
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->
-				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=admin&#39;)">管理登入</button>
-				<div style="width:89%; height:480px;" class="dbor">
+				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
+				<div style="width:89%; height:480px;" class="dbor cent">
 					<span class="t botli">校園映象區</span>
+
+					<div ><img src="./icon//up.jpg" alt="" onclick="pp(1);"></div>
+
+					<div>
+						<?php
+						$images=$Image->all(['sh'=>1]);
+			
+						foreach($images as $key => $img){
+							echo "<div id='ssaa{$key}' class='img' >";
+							echo "<img src='./upload/{$img['img']}' alt='' style='width: 150px;height: 103px;border:2px solid orange;margin:1px'>";
+							echo "</div>";
+						}
+						?>
+					</div>
+					<div><img src="./icon/dn.jpg" alt="" onclick="pp(2);"></div>
+
+
 					<script>
 						var nowpage = 0,
-							num = 0;
-
+							num = <?=$Image->count(['sh'=>1]);?>;
+							
 						function pp(x) {
+					
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
-							if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) {
+							if (x == 2 && (nowpage + 1)  <= num * 1 + 3) {
 								nowpage++;
 							}
-							$(".im").hide()
+							$(".img").hide();
 							for (s = 0; s <= 2; s++) {
 								t = s * 1 + nowpage * 1;
-								$("#ssaa" + t).show()
+								$("#ssaa" + t).show();
 							}
 						}
-						pp(1)
+						pp(1);
+						
 					</script>
 				</div>
 			</div>
